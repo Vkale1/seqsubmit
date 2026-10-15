@@ -1,0 +1,45 @@
+nextflow_pipeline {
+
+    name "Test reads submission workflow stub - long-read BAM"
+    script "../main.nf"
+    tag "pipeline"
+    tag "mode_reads"
+    tag "test_reads_long_bam"
+    profile "test_reads_long_bam"
+
+    test("-profile test_reads_long_bam") {
+
+        when {
+            params {
+                outdir = "$outputDir"
+                // TODO: copying BAM, drop once the BAM + samplesheet are hosted in nf-core/test-datasets
+                def samplesheet = new File("${launchDir}/samplesheet_reads_bam.csv")
+                samplesheet.parentFile.mkdirs()
+                samplesheet.text = new File("${projectDir}/tests/test_data/samplesheets/samplesheet_reads_bam.csv").text
+                    .replace("tests/test_data/reads/tiny_ont.bam", "${projectDir}/tests/test_data/reads/tiny_ont.bam")
+                input = samplesheet.toString()
+            }
+        }
+
+        then {
+            // stable_name: All files + folders in ${params.outdir}/ with a stable name
+            def stable_name = getAllFilesFromDir(params.outdir, relative: true, includeDir: true, ignore: ['pipeline_info/*.{html,json,txt}'])
+            // stable_path: All files in ${params.outdir}/ with stable content
+            def stable_path = getAllFilesFromDir(params.outdir, ignoreFile: 'tests/.nftignore')
+            // Early failure no need to test the rest of snapshots
+            assert workflow.success
+            assertAll(
+                { assert snapshot(
+                    // Number of successful tasks
+                    workflow.trace.succeeded().size(),
+                    // pipeline versions.yml file for multiqc from which Nextflow version is removed because we test pipelines on multiple Nextflow versions
+                    removeNextflowVersion("$outputDir/pipeline_info/nf_core_seqsubmit_software_mqc_versions.yml"),
+                    // All stable path name, with a relative path
+                    stable_name,
+                    // All files with stable contents
+                    stable_path
+                ).match() }
+            )
+        }
+    }
+}
