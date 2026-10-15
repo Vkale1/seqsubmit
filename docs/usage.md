@@ -220,7 +220,7 @@ assembly_002,data/assembly_002.fasta.gz,,,42.7,ERR011323,MEGAHIT,1.2.9,metatrans
 ```
 
 | Column              | Required    | Description                                                                                                                                           |
-|---------------------|-------------|-------------------------------------------------------------------------------------------------------------------------------------------------------|
+| ------------------- | ----------- | ----------------------------------------------------------------------------------------------------------------------------------------------------- |
 | `id`                | Yes         | A unique identifier for this data entry. Must be globally unique within the input dataset.                                                            |
 | `fasta`             | Yes         | Path to assembly contigs in FASTA format compressed with `gzip`.                                                                                      |
 | `fastq_1`           | Conditional | Path to single-end/paired-end forward reads in FASTQ format (optionally gzipped). Required if `coverage` is not provided.                             |
