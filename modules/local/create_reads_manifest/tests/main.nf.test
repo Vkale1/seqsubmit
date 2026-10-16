@@ -112,10 +112,8 @@ nextflow_process {
                         insert_size: null,
                         library_name: null,
                         description: null,
-                        file_type: 'bam'
                     ],
-                    // TODO: switch to params.pipelines_testdata_base_path once uploaded to nf-core/test-datasets
-                    file("${projectDir}/tests/test_data/reads/tiny_ont.bam", checkIfExists: true)
+                    file(params.pipelines_testdata_base_path + 'test_data/reads/tiny_ont.bam', checkIfExists: true)
                 ]
                 input[1] = "PRJEB12345"
                 """

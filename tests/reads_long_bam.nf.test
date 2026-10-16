@@ -1,6 +1,6 @@
 nextflow_pipeline {
 
-    name "Test reads submission workflow stub - long-read BAM"
+    name "Test reads submission workflow - long-read BAM"
     script "../main.nf"
     tag "pipeline"
     tag "mode_reads"
@@ -12,12 +12,6 @@ nextflow_pipeline {
         when {
             params {
                 outdir = "$outputDir"
-                // TODO: copying BAM, drop once the BAM + samplesheet are hosted in nf-core/test-datasets
-                def samplesheet = new File("${launchDir}/samplesheet_reads_bam.csv")
-                samplesheet.parentFile.mkdirs()
-                samplesheet.text = new File("${projectDir}/tests/test_data/samplesheets/samplesheet_reads_bam.csv").text
-                    .replace("tests/test_data/reads/tiny_ont.bam", "${projectDir}/tests/test_data/reads/tiny_ont.bam")
-                input = samplesheet.toString()
             }
         }
 
