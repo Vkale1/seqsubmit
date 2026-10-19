@@ -6,7 +6,10 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ## v1.0.1dev - [date]
 
 ### `Fixed`
-
+- [#106](https://github.com/nf-core/seqsubmit/pull/106) 
+  - metaT support for ASSEMBLYSUBMIT
+- [#108](https://github.com/nf-core/seqsubmit/pull/108)
+  - Added test usecase in test-datasets https://github.com/nf-core/test-datasets/pull/2324 with contamination=0
 - [#107](https://github.com/nf-core/seqsubmit/pull/107)
   - Fix `GENOMESUBMIT` treating a zero-valued completeness/contamination as a missing one. The branch that decides whether to (re)compute the statistics with CheckM2 tested the samplesheet values for Groovy truthiness, and the number `0` is falsey:
 
