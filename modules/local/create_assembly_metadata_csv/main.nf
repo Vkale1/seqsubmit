@@ -26,7 +26,7 @@ process CREATE_ASSEMBLY_METADATA_CSV {
         meta.assembler_version,
         fasta.name,
         '',    // Sample column left empty because co-assemblies are not supported
-        meta.library_strategy ?: 'metagenome'  // it would be applied by schema, but still needed as safe case for tests
+        meta.assembly_type ?: 'metagenome'  // it would be applied by schema, but still needed as safe case for tests
     ].join(',')
     """
     cat <<-END_CSV > ${meta.id}_assembly_metadata.csv

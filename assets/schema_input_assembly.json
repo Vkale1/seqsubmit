@@ -93,13 +93,13 @@
                 "description": "Version of the assembler software used to generate the assembly, e.g. 1.0.0",
                 "meta": ["assembler_version"]
             },
-            "library_strategy": {
+            "assembly_type": {
                 "type": "string",
                 "enum": ["metagenome", "metatranscriptome"],
-                "errorMessage": "Assembly library strategy should be metagenome or metatranscriptome",
-                "description": "Assembly library strategy: metagenome or metatranscriptome. Default: metagenome",
+                "errorMessage": "Assembly type should be metagenome or metatranscriptome",
+                "description": "Assembly type: metagenome or metatranscriptome. Written to the ENA manifest as ASSEMBLY_TYPE 'primary metagenome' or 'metatranscriptome'. Default: metagenome",
                 "default": "metagenome",
-                "meta": ["library_strategy"]
+                "meta": ["assembly_type"]
             }
         },
         "required": ["id", "fasta", "run_accession", "assembler", "assembler_version"],
